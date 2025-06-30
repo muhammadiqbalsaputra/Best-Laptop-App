@@ -8,20 +8,28 @@
   <div>
     <label class="block text-sm mb-1">Nama Kriteria</label>
     <input type="text" name="nama" required value="{{ k.nama }}"
-           class="w-full border px-3 py-2 rounded focus:ring-indigo-500" />
+      class="w-full border px-3 py-2 rounded focus:ring-indigo-500" />
   </div>
 
   <div>
     <label class="block text-sm mb-1">Bobot (1‑5)</label>
     <input type="number" name="bobot" min="1" max="5" required value="{{ k.bobot }}"
-           class="w-full border px-3 py-2 rounded focus:ring-indigo-500" />
+      class="w-full border px-3 py-2 rounded focus:ring-indigo-500" />
   </div>
 
+  <div>
+    <label class="block text-sm mb-1">Jenis Kriteria</label>
+    <select name="jenis" class="w-full border rounded px-3 py-1">
+      <option value="benefit" {{ 'selected' if k.jenis=='benefit' else '' }}>Benefit</option>
+      <option value="cost" {{ 'selected' if k.jenis=='cost' else '' }}>Cost</option>
+    </select>
+  </div>
+
+
   <div class="flex justify-end gap-4 pt-2">
-    <a href="{{ url_for('kriteria') }}"
-       class="inline-flex items-center px-4 py-2 rounded-lg border">Batal</a>
+    <a href="{{ url_for('kriteria') }}" class="inline-flex items-center px-4 py-2 rounded-lg border">Batal</a>
     <button type="submit"
-            class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
+      class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
       Simpan
     </button>
   </div>

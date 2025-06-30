@@ -77,33 +77,37 @@ def edit_kriteria(id):
         if request.method == "POST":
             nama_baru  = request.form.get("nama")
             bobot_baru = request.form.get("bobot", type=int)
+            jenis_baru = request.form.get("jenis", "benefit")   # NEW
             if not nama_baru or not (1 <= bobot_baru <= 5):
                 flash("Nama & bobot 1‑5 wajib diisi", "danger")
             else:
                 cur.execute(
-                    "UPDATE kriteria SET nama=%s, bobot=%s WHERE id=%s",
-                    (nama_baru, bobot_baru, id)
+                    "UPDATE kriteria SET nama=%s, bobot=%s, jenis=%s WHERE id=%s",
+                    (nama_baru, bobot_baru, jenis_baru, id)
                 )
                 flash("Kriteria diperbarui", "success")
                 return redirect(url_for("kriteria"))
-
-    # GET – tampilkan form
     return render_template("kriteria_edit.html", k=k)
+
 
 # Kriteria ADD
 @app.route("/kriteria/add", methods=["GET", "POST"])
 def add_kriteria():
     if request.method == "POST":
-        nama  = request.form.get("nama")
-        bobot = request.form.get("bobot", type=int)
+        nama   = request.form.get("nama")
+        bobot  = request.form.get("bobot", type=int)
+        jenis  = request.form.get("jenis", "benefit")   # NEW
         if not nama or not (1 <= bobot <= 5):
-            flash("Nama dan bobot (1–5) wajib diisi", "danger")
+            flash("Nama & bobot (1‑5) wajib diisi", "danger")
         else:
             with db_cursor() as cur:
-                cur.execute("INSERT INTO kriteria (nama, bobot) VALUES (%s, %s)", (nama, bobot))
-            flash("Kriteria ditambahkan", "success")
+                cur.execute(
+                    "INSERT INTO kriteria (nama, bobot, jenis) VALUES (%s, %s, %s)",
+                    (nama, bobot, jenis)
+                )
+            flash("Kriteria ditambahkan ✔", "success")
             return redirect(url_for("kriteria"))
-    return render_template("kriteria_add.html")
+    return render_template("kriteria_add.html")   # form sudah ada dropdown jenis
 
 
 
@@ -276,9 +280,13 @@ def rangking():
             for k in kriterias:
                 v = skor_map.get(k['id'])
                 if v is None:
-                    continue  # atau v = 1.0 jika ingin default
-                wp *= pow(v, w[k['id']])
+                    continue
+                if k['jenis'] == 'cost':           # NEW
+                    wp *= pow(v, -w[k['id']])      # cost → pangkat negatif
+                else:
+                    wp *= pow(v,  w[k['id']])      # benefit
             hasil.append({'nama': alt['nama'], 'wp': wp})
+
 
         total_wp = sum(h['wp'] for h in hasil) or 1.0
         for h in hasil:
