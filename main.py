@@ -32,6 +32,13 @@ def dashboard():
     return render_template("dashboard.html", total_alt=total_alt, total_krit=total_krit)
 
 # --------------------------------------------------
+#  PANDUAN LENGKAP
+# --------------------------------------------------
+@app.route("/panduan")
+def panduan():
+    return render_template("panduan.html")
+
+# --------------------------------------------------
 #  K R I T E R I A  (CRUD)
 # --------------------------------------------------
 @app.route("/kriteria", methods=["GET", "POST"])

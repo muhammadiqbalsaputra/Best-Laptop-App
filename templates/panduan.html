@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block title %}Panduan Lengkap – SPK Laptop{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6 text-indigo-700">Panduan Lengkap Aplikasi SPK Laptop</h1>
+
+<h2 class="text-xl font-semibold mt-8 mb-3">1. Alur Umum</h2>
+<ol class="list-decimal ml-6 space-y-2 text-gray-800">
+  <li>Tambahkan <strong>Kriteria</strong> ➜ tentukan <em>nama</em>, <em>bobot (1‑5)</em>, dan <em>jenis</em> (<code>benefit</code>/<code>cost</code>).</li>
+  <li>Tambahkan <strong>Alternatif</strong> (nama laptop) ➜ masukkan nilai skor setiap kriteria.</li>
+  <li>Lihat hasil perhitungan di menu <strong>Rangking</strong>. Laptop dengan nilai V tertinggi adalah rekomendasi utama.</li>
+</ol>
+
+<h2 class="text-xl font-semibold mt-8 mb-3">2. Kriteria & Konversi Skor</h2>
+<table class="min-w-full text-sm bg-white shadow rounded-lg overflow-hidden">
+  <thead class="bg-indigo-100 text-indigo-900">
+    <tr>
+      <th class="px-4 py-2 text-left">Kriteria</th>
+      <th class="px-4 py-2 text-left">Unit Asli / Skala</th>
+      <th class="px-4 py-2 text-left">Jenis</th>
+      <th class="px-4 py-2 text-left">Cara Konversi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="border-t"><td class="px-4 py-2">Processor</td><td class="px-4 py-2">1‑10</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Semakin tinggi semakin baik</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Penyimpanan</td><td class="px-4 py-2">GB</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Nilai langsung (128‑2048+)</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Jenis Penyimpanan</td><td class="px-4 py-2">1 = HDD, 2 = Hybrid, 3 = SSD</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Mapping numerik</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Tahun Rilis</td><td class="px-4 py-2">YYYY</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Semakin baru semakin baik</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Harga</td><td class="px-4 py-2">1 = Murah … 10 = Mahal</td><td class="px-4 py-2 text-red-600">Cost</td><td class="px-4 py-2">Skala subjektif, lebih kecil lebih baik</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Daya Tahan</td><td class="px-4 py-2">Jam</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Nilai langsung</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Ukuran Layar</td><td class="px-4 py-2">Inch</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Nilai langsung</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Berat</td><td class="px-4 py-2">kg</td><td class="px-4 py-2 text-red-600">Cost</td><td class="px-4 py-2">Lebih ringan lebih baik</td></tr>
+    <tr class="border-t"><td class="px-4 py-2">Fitur Tambahan</td><td class="px-4 py-2">1 = Minim … 3 = Lengkap</td><td class="px-4 py-2">Benefit</td><td class="px-4 py-2">Mapping numerik</td></tr>
+  </tbody>
+</table>
+
+<h2 class="text-xl font-semibold mt-8 mb-3">3. Rumus Weighted Product</h2>
+<pre class="bg-gray-100 p-4 rounded-lg overflow-auto text-xs">
+S_i = Π (x_ij)^w_j        (benefit)
+      Π (x_ij)^-w_j       (cost)
+
+V_i = S_i / Σ S_k
+</pre>
+<p class="text-sm text-gray-700 mt-2">
+Nilai <code>V_i</code> ditampilkan di halaman Rangking.  Laptop dengan <code>V_i</code> terbesar berada di posisi 1.
+</p>
+
+<h2 class="text-xl font-semibold mt-8 mb-3">4. Tips Input Data</h2>
+<ul class="list-disc ml-6 text-gray-800 space-y-1">
+  <li>Pastikan bobot total tidak perlu 100%; sistem akan menormalkan otomatis.</li>
+  <li>Kriteria cost (Harga & Berat) otomatis diperlakukan sebagai pangkat negatif.</li>
+  <li>Kosongkan skor jika data belum tersedia—sistem akan abaikan kriteria tersebut untuk laptop itu.</li>
+</ul>
+
+{% endblock %}

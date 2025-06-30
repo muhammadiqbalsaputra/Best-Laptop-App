@@ -5,38 +5,44 @@
 
 <!-- Jumbotron -->
 <div class="bg-indigo-600 text-white p-8 rounded-xl shadow mb-8">
-  <h1 class="text-3xl font-bold mb-2">Sistem Pendukung Keputusan</h1>
-  <p class="text-lg">Menentukan Laptop Terbaik untuk Mahasiswa Menggunakan Metode Weighted Product</p>
-</div>
+  <h1 class="text-3xl font-bold mb-2">Sistem Pendukung Keputusan Pemilihan Laptop Mahasiswa</h1>
+  <p class="text-lg">Membantu memilih laptop terbaik menggunakan metode Weighted Product</p>
 
-<!-- Statistik Card -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  
-  <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-    <div class="text-indigo-600 text-4xl font-bold">{{ total_alt }}</div>
-    <div class="mt-2 text-sm text-gray-500">Total Alternatif Laptop</div>
+  <!-- Statistik Card -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:scale-105">
+      <div class="text-indigo-600 text-4xl font-bold">{{ total_alt }}</div>
+      <div class="mt-2 text-sm text-gray-500">Total Alternatif Laptop</div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:scale-105">
+      <div class="text-indigo-600 text-4xl font-bold">{{ total_krit }}</div>
+      <div class="mt-2 text-sm text-gray-500">Jumlah Kriteria Penilaian</div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition hover:scale-105">
+      <div class="text-indigo-600 text-4xl font-bold">WP</div>
+      <div class="mt-2 text-sm text-gray-500">Metode Perhitungan</div>
+    </div>
   </div>
 
-  <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-    <div class="text-indigo-600 text-4xl font-bold">{{ total_krit }}</div>
-    <div class="mt-2 text-sm text-gray-500">Jumlah Kriteria Penilaian</div>
+  <!-- Panduan singkat -->
+  <div class="mt-10 bg-gray-50 p-6 rounded-lg shadow text-sm text-gray-700">
+    <h2 class="text-lg font-semibold text-indigo-700 mb-3">📘 Panduan Cepat:</h2>
+    <ul class="list-disc ml-5 space-y-1">
+      <li>Tambahkan kriteria dengan bobot dan jenis (benefit/cost)</li>
+      <li>Masukkan alternatif laptop dan beri nilai per kriteria</li>
+      <li>Lihat hasil peringkat di halaman <a href="{{ url_for('rangking') }}"
+          class="text-indigo-600 underline">Rangking</a></li>
+    </ul>
+    <br>
+
+    <a href="{{ url_for('panduan') }}"
+          class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8c.828 0 1.5.672 1.5 1.5S12.828 11 12 11s-1.5-.672-1.5-1.5S11.172 8 12 8zm0 5v4m0-14a9 9 0 100 18 9 9 0 000-18z" />
+          </svg>
+          <span class="font-semibold">Lihat Panduan Lengkap</span>
+        </a>
   </div>
 
-  <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-    <div class="text-indigo-600 text-4xl font-bold">WP</div>
-    <div class="mt-2 text-sm text-gray-500">Metode Perhitungan</div>
-  </div>
-
-</div>
-
-<!-- Panduan singkat -->
-<div class="mt-10 bg-gray-50 p-6 rounded-lg shadow text-sm text-gray-700">
-  <h2 class="text-lg font-semibold text-indigo-700 mb-3">📘 Panduan Cepat:</h2>
-  <ul class="list-disc ml-5 space-y-1">
-    <li>Tambahkan kriteria dengan bobot dan jenis (benefit/cost)</li>
-    <li>Masukkan alternatif laptop dan beri nilai per kriteria</li>
-    <li>Lihat hasil peringkat di halaman <a href="{{ url_for('rangking') }}" class="text-indigo-600 underline">Rangking</a></li>
-  </ul>
-</div>
-
-{% endblock %}
+  {% endblock %}

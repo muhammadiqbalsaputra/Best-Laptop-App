@@ -1,11 +1,13 @@
-<nav class="bg-white shadow-md fixed w-full z-20 top-0 left-0">
-  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="{{ url_for('dashboard') }}" class="text-xl font-semibold text-indigo-600">SPK Laptop</a>
-    <ul class="flex gap-6 text-sm md:text-base">
-      <li><a href="{{ url_for('dashboard') }}" class="hover:text-indigo-600 {% if request.endpoint=='dashboard' %}font-semibold{% endif %}">Dashboard</a></li>
-      <li><a href="{{ url_for('kriteria') }}" class="hover:text-indigo-600 {% if request.endpoint=='kriteria' %}font-semibold{% endif %}">Kriteria</a></li>
-      <li><a href="{{ url_for('alternatif') }}" class="hover:text-indigo-600 {% if request.endpoint=='alternatif' %}font-semibold{% endif %}">Alternatif</a></li>
-      <li><a href="{{ url_for('rangking') }}" class="hover:text-indigo-600 {% if request.endpoint=='rangking' %}font-semibold{% endif %}">Rangking</a></li>
-    </ul>
+<!-- layout.html -->
+<nav class="bg-gradient-to-r from-indigo-700 to-purple-700 text-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a href="{{ url_for('dashboard') }}" class="text-xl font-bold tracking-wide">💻FindYourLaptop</a>
+    <div class="space-x-2 text-sm sm:text-base">
+      <a href="{{ url_for('dashboard') }}" class="inline-flex items-center px-4 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition duration-200 font-medium">Dashboard</a>
+      <a href="{{ url_for('kriteria') }}" class="inline-flex items-center px-4 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition duration-200 font-medium">Kriteria</a>
+      <a href="{{ url_for('alternatif') }}" class="inline-flex items-center px-4 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition duration-200 font-medium">Alternatif</a>
+      <a href="{{ url_for('rangking') }}" class="inline-flex items-center px-4 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition duration-200 font-medium">Rangking</a>
+      <a href="{{ url_for('panduan') }}" class="inline-flex items-center px-4 py-2 rounded-lg hover:bg-white hover:text-indigo-700 transition duration-200 font-medium">Panduan</a>
+    </div>
   </div>
 </nav>
