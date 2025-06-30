@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Edit Skor – {{ alt.nama }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-2xl font-bold mb-6">Edit Skor – <span class="text-indigo-600">{{ alt.nama }}</span></h1>
+
+  <form method="post" class="space-y-6 bg-white p-6 rounded-xl shadow">
+    {% for k in kriterias %}
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+        <label class="text-sm font-medium text-gray-700">
+          {{ k.nama }} <span class="text-gray-500 text-xs">(Bobot: {{ k.bobot }})</span>
+        </label>
+        <input type="number" step="0.01" min="0" name="k_{{ k.id }}"
+               value="{{ existing.get(k.id, '') }}"
+               placeholder="Isi skor atau biarkan kosong"
+               class="col-span-2 w-full border px-3 py-2 rounded focus:ring-indigo-500" />
+      </div>
+    {% endfor %}
+
+    <div class="flex justify-end gap-4 pt-4">
+      <a href="{{ url_for('alternatif') }}"
+         class="inline-flex items-center px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+        Batal
+      </a>
+      <button type="submit"
+              class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
+        Simpan Skor
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

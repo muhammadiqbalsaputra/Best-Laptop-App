@@ -1,0 +1,114 @@
+{# templates/alternatif.html #}
+{% extends 'layout.html' %}
+{% block title %}Alternatif – SPK Laptop{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Daftar Alternatif & Skor</h1>
+
+    <!-- tombol tambah -->
+    <a href="{{ url_for('add_alternatif') }}"
+        class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
+        + Tambah
+    </a>
+</div>
+
+<!-- tabel -->
+<div class="overflow-x-auto bg-white shadow rounded-lg">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Laptop
+                </th>
+                {% for k in kriterias %}
+                <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    {{ k.nama }}<br><span class="text-[10px]">(B{{ k.bobot }})</span>
+                </th>
+                {% endfor %}
+                <th class="px-6 py-3"></th>
+            </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for a in alternatifs %}
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap">{{ loop.index }}</td>
+                <td class="px-6 py-4 font-medium">{{ a.nama }}</td>
+
+                {# skor per kriteria #}
+                {% for k in kriterias %}
+                {% set key = a.id ~ '-' ~ k.id %}
+                <td class="px-4 py-4 text-center">
+                    {% if key in nilai %}
+                    {{ nilai[key] }}
+                    <!-- tombol hapus skor -->
+                    <a href="{{ url_for('del_skor', alt_id=a.id, krit_id=k.id) }}"
+                        class="inline-block bg-red-500 hover:bg-red-600 text-white text-xs px-1.5 py-0.5 rounded ml-1"
+                        title="Hapus skor">×</a>
+                    {% else %}
+                    –
+                    {% endif %}
+                </td>
+                {% endfor %}
+
+                <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-2 justify-end">
+                        <!-- edit nama -->
+                        <a href="{{ url_for('edit_alternatif', id=a.id) }}"
+                            class="inline-flex items-center bg-amber-500 hover:bg-amber-600 text-white text-sm px-3 py-1 rounded-lg shadow">
+                            Edit Nama
+                        </a>
+
+                        <!-- edit skor -->
+                        <a href="{{ url_for('skor_alt', alt_id=a.id) }}"
+                            class="inline-flex items-center bg-sky-500 hover:bg-sky-600 text-white text-sm px-3 py-1 rounded-lg shadow">
+                            Edit Skor
+                        </a>
+
+                        <!-- hapus alternatif -->
+                        <a href="{{ url_for('del_alternatif', id=a.id) }}"
+                            class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white text-sm px-3 py-1 rounded-lg shadow">
+                            Hapus
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal/Form Tambah Alternatif -->
+<div id="modalAddAlt" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">
+    <div class="bg-white w-full max-w-md p-6 rounded-xl shadow-lg space-y-4">
+        <h2 class="text-xl font-semibold">Tambah Alternatif</h2>
+        <form method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm mb-1">Nama Laptop</label>
+                <input type="text" name="nama" required
+                    class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-500" />
+            </div>
+
+            <div class="space-y-2">
+                <label class="block font-semibold">Nilai Skor per Kriteria:</label>
+                {% for k in kriterias %}
+                <div class="flex items-center gap-3">
+                    <label class="w-32 text-sm">{{ k.nama }} (B{{ k.bobot }})</label>
+                    <input type="number" step="0.01" min="0" name="k_{{k.id}}" required
+                        class="flex-1 border px-3 py-1 rounded focus:ring-indigo-500" />
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" data-modal-hide="modalAddAlt" class="px-4 py-2 border rounded-lg">Batal</button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow">
+                    Simpan
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

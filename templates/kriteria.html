@@ -1,0 +1,78 @@
+{# templates/kriteria.html #}
+{% extends 'layout.html' %}
+{% block title %}Kriteria – SPK Laptop{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Kriteria &amp; Pembobotan</h1>
+
+    <!-- tombol tambah -->
+    <a href="{{ url_for('add_kriteria') }}"
+        class="inline-flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow">
+        + Tambah
+    </a>
+</div>
+
+<!-- tabel kriteria -->
+<div class="overflow-x-auto bg-white shadow rounded-lg">
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Kriteria
+                </th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bobot (1‑5)
+                </th>
+                <th class="px-6 py-3"></th>
+            </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+            {% for k in kriterias %}
+            <tr>
+                <td class="px-6 py-4 whitespace-nowrap">{{ loop.index }}</td>
+                <td class="px-6 py-4">{{ k.nama }}</td>
+                <td class="px-6 py-4">{{ k.bobot }}</td>
+                <td class="px-6 py-4 text-right space-x-2">
+                    <a href="{{ url_for('edit_kriteria', id=k.id) }}"
+                        class="inline-flex items-center bg-amber-500 hover:bg-amber-600 text-white text-xs px-3 py-1 rounded-lg shadow">
+                        Edit
+                    </a>
+                    <a href="{{ url_for('del_kriteria', id=k.id) }}"
+                        class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded-lg shadow">
+                        Hapus
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- modal tambah kriteria -->
+<div id="modalAddKrit" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">
+    <div class="bg-white w-full max-w-md p-6 rounded-xl shadow-lg space-y-4">
+        <h2 class="text-xl font-semibold">Tambah Kriteria</h2>
+
+        <form method="post" class="space-y-4">
+            <div>
+                <label class="block text-sm mb-1">Nama Kriteria</label>
+                <input type="text" name="nama" required
+                    class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-500" />
+            </div>
+
+            <div>
+                <label class="block text-sm mb-1">Bobot (1‑5)</label>
+                <input type="number" name="bobot" min="1" max="5" required
+                    class="w-full border px-3 py-2 rounded focus:ring-2 focus:ring-indigo-500" />
+            </div>
+
+            <div class="flex justify-end gap-3 pt-1">
+                <button type="button" data-modal-hide="modalAddKrit" class="px-4 py-2 rounded-lg border">Batal</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
