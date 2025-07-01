@@ -2,22 +2,28 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-
 <div class="bg-indigo-600 text-white p-8 rounded-xl shadow mb-8 relative overflow-hidden">
   <div class="flex flex-col lg:flex-row items-center justify-between z-10 relative">
     <div>
-      <h1 class="text-4xl font-bold mb-2">Sistem Pendukung Keputusan Pemilihan Laptop Mahasiswa</h1>
-      <p class="text-lg mb-4">Membantu memilih laptop terbaik menggunakan metode Weighted Product</p>
+      <h1 class="text-4xl font-bold mb-5">Sistem Pendukung Keputusan Pemilihan Laptop Mahasiswa</h1>
+      <p class="text-lg mb-4 text-justify pr-10">
+        Aplikasi ini dirancang untuk membantu mahasiswa dalam memilih laptop yang paling sesuai dengan kebutuhan
+        akademik maupun produktivitas harian. Dengan menggunakan metode Weighted Product, sistem akan mengevaluasi
+        berbagai alternatif berdasarkan kriteria seperti prosesor, penyimpanan, harga, dan lainnya secara akurat dan
+        terstruktur.
+      </p>
+
     </div>
     <img src="{{ url_for('static', filename='image/laptop2.png') }}" alt="Ilustrasi" class="w-64 lg:w-80">
   </div>
-  <div class="absolute inset-0 bg-gradient-to-r from-purple-300 via-indigo-300 to-blue-200 opacity-10 z-0 rounded-xl"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-purple-300 via-indigo-300 to-blue-200 opacity-10 z-0 rounded-xl">
+  </div>
 </div>
 
 
 <!-- Second Page -->
 <!-- Jumbotron -->
-<div class="bg-indigo-600 text-white p-8 rounded-xl shadow mb-8">
+<div class="bg-indigo-600 text-white p-8 rounded-xl shadow">
   <!-- <h1 class="text-3xl font-bold mb-2">Sistem Pendukung Keputusan Pemilihan Laptop Mahasiswa</h1>
   <p class="text-lg">Membantu memilih laptop terbaik menggunakan metode Weighted Product</p> -->
 
@@ -49,13 +55,13 @@
     <br>
 
     <a href="{{ url_for('panduan') }}"
-          class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 8c.828 0 1.5.672 1.5 1.5S12.828 11 12 11s-1.5-.672-1.5-1.5S11.172 8 12 8zm0 5v4m0-14a9 9 0 100 18 9 9 0 000-18z" />
-          </svg>
-          <span class="font-semibold">Lihat Panduan Lengkap</span>
-        </a>
+      class="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition hover:scale-105">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M12 8c.828 0 1.5.672 1.5 1.5S12.828 11 12 11s-1.5-.672-1.5-1.5S11.172 8 12 8zm0 5v4m0-14a9 9 0 100 18 9 9 0 000-18z" />
+      </svg>
+      <span class="font-semibold">Lihat Panduan Lengkap</span>
+    </a>
   </div>
 
   {% endblock %}
