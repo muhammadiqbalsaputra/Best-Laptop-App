@@ -107,16 +107,6 @@ Isi/Edit skor untuk alternatif tertentu di halaman “Edit Skor”.
 
 Buka /rangking → lihat juara dan nilai V.
 
-## 🔐 Roadmap Fitur
- Export ranking ke CSV/PDF
-
- Pencarian & filter alternatif
-
- User auth (admin vs viewer)
-
- AJAX / Fetch API untuk update tanpa reload
-
-Pull request / ide always welcome! 🤝
 
 ## 👤 Dev
 Muhammad Iqbal Saputra – D4 Teknik Informatika
