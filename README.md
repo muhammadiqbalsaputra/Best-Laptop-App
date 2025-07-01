@@ -69,7 +69,7 @@ export DB_USER=root
 export DB_PASS=yourpassword
 ```
 
-##🧮 Daftar Kriteria & Konversi Skor
+##🧮 Daftar Kriteria & Konversi Nilai
 
 ```
 |  ID | Kriteria               | Unit Asli / Skala | **Skor disimpan**            | Konversi & Catatan                      |
